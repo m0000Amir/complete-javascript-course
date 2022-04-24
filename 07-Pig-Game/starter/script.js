@@ -42,12 +42,15 @@ init();
 
 
 const switchPlayer = function () {
+    currentScore = 0;
+    currentEl.textContent = '0';
     currentEl = currentEl === current0El ? current1El : current0El;
     player0El.classList.toggle('player--active');
     player1El.classList.toggle('player--active');
 }
 
 btnRoll.addEventListener('click', function () {
+
     if (playing) {
 //    1. Generating new dice roll
         const dice = Math.trunc(Math.random() * 6) + 1;
@@ -60,8 +63,6 @@ btnRoll.addEventListener('click', function () {
             currentEl.textContent = currentScore;
             console.log(currentScore);
         } else {
-            currentEl.textContent = '0';
-            currentScore = 0;
             switchPlayer();
         }
 
@@ -71,11 +72,11 @@ btnRoll.addEventListener('click', function () {
 
 btnHold.addEventListener('click', function () {
     let i = currentEl === current0El ? 0 : 1;
-    scores[i] = currentScore;
+    scores[i] += currentScore;
     document.getElementById(`score--${i}`)
         .textContent = String(scores[i]);
 
-    if (scores[i] >= 10) {
+    if (scores[i] >= 100) {
         document
             .querySelector(`.player--${i}`)
             .classList.add('player--winner');
@@ -84,7 +85,6 @@ btnHold.addEventListener('click', function () {
             .classList.remove('player--active');
         playing = false;
         diceEl.classList.add('hidden');
-        // debugger;
     } else {
         switchPlayer();
     }

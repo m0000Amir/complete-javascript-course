@@ -12,6 +12,13 @@ const restaurant = {
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
+  order: function (starterIndex, mainIndex) {
+    return [
+      this.starterMenu[starterIndex], 
+      this.mainMenu[mainIndex]
+    ]
+  },
+
   openingHours: {
     thu: {
       open: 12,
@@ -27,3 +34,45 @@ const restaurant = {
     },
   },
 };
+
+let [starter, main] = restaurant.order(2,1)
+console.log('starter: ', starter, 'main: ', main);
+
+const arr = [1, 2, [3, 4,]]
+let [first, , [third, fourth]] = arr;
+console.log(first, third, fourth);
+
+console.log(restaurant.order(0, 1));
+
+let {
+  name: restaurantName,
+  openingHours: hours
+} = restaurant;
+console.log(restaurantName, hours);
+
+let {
+  mainMenu: menu = [],
+  categories: countryFood =[]} = restaurant;
+console.log(menu, countryFood, hours);
+
+
+let a = [1, 2, 3, 4];
+
+let c = ["a", "b"];
+console.log("c = ", c.concat(a));
+
+let x = 1;
+let y = 2;
+
+console.log(`before x = ${x} and y = ${y}`);
+[y, x] = [x, y];
+
+console.log(`after x = ${x} and y = ${y}`);
+
+// restaurant.numGuests = 0;
+
+let guests = restaurant.numGuests || 10;
+console.log(`Guests number is ${guests}`);
+
+// Nullish coalescing operator:
+console.log(restaurant.guests ?? 10)
